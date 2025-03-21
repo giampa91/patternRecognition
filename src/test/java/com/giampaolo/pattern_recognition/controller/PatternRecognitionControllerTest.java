@@ -37,17 +37,18 @@ class PatternRecognitionControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void givenPoint_whenAddPoint_thenStatusIsOk() throws Exception {
+    void givenPoint_whenAddPoint_thenStatusIsCreated() throws Exception {
         // Given
         Point point = Utils.randomPoint();
 
         String pointJson = objectMapper.writeValueAsString(point);
 
         // When // Then
+        when(service.addPoint(any())).thenReturn(Boolean.TRUE);
         mockMvc.perform(post(POINT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(pointJson))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         verify(service).addPoint(Mockito.any(PointDTO.class));
     }

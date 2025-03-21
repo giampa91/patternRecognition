@@ -5,6 +5,7 @@ import com.giampaolo.pattern_recognition.service.PatternRecognitionService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +36,10 @@ public class PatternRecognitionController {
      */
     @PostMapping(POINT)
     public ResponseEntity<Boolean> addPoint(@Valid @NotNull @RequestBody PointDTO pointDTO) {
-        return ResponseEntity.ok().body(service.addPoint(pointDTO));
+        return service.addPoint(pointDTO) ? ResponseEntity.status(HttpStatus.CREATED).body(true)
+                : ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(false);
     }
+
 
     /**
      * Retrieves all points currently stored in the space.
