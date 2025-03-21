@@ -8,3 +8,5 @@ example statistical data analysis.
 # Problem to solve
 Given a set of N feature points in the plane, determine every line that contains N or more of the points, and
 return all points involved
+# OpenApi definition
+http://localhost:8080/swagger-ui/index.html
